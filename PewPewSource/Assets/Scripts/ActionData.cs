@@ -26,7 +26,8 @@ public class ActionMove : IAction
 	}
 
 	public IEnumerator ActionOverTime(Transform Target)
-	{
+	{ 
+		Init(Target);
 		for (float t = 0f, perc = 0f; perc < 1f; t += Time.fixedDeltaTime)
 		{
 			perc = Mathf.Clamp01(t / Duration);
