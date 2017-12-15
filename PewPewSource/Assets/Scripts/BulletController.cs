@@ -6,13 +6,12 @@ public class BulletController : MonoBehaviour {
 
 	public Vector3 Speed = new Vector3(100, 0f, 0f);
 	public float DeathTime = 2;
+	public PawnComponent Pawn;
 
 	public IAction[] ActionToDo;
-	private Transform _trans;
 
 	public void Awake()
 	{
-		_trans = transform;
 		Destroy(gameObject, DeathTime);
 	}
 
@@ -44,7 +43,7 @@ public class BulletController : MonoBehaviour {
 		{
 			for (int i = 0; i < ActionToDo.Length; i++)
 			{
-				var routine = ActionToDo[i].ActionOverTime(_trans);
+				var routine = ActionToDo[i].ActionOverTime(Pawn);
 				while (routine.MoveNext())
 					yield return new WaitForFixedUpdate();
 			}

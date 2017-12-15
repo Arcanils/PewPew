@@ -4,46 +4,62 @@ using UnityEngine;
 
 public interface IAction
 {
-	IEnumerator ActionOverTime(Transform Target);
+	IEnumerator ActionOverTime(PawnComponent Pawn);
 }
 
 public class ActionMove : IAction
 {
 	public Vector2 VecMove;
 	public float Duration;
-	
 
 	private Transform _trans;
 	private Vector3 _origine;
 	private Vector3 _currentOffset;
 	private static WaitForFixedUpdate _waitFixed = new WaitForFixedUpdate();
 
-	private void Init(Transform Target)
+	private void Init(PawnComponent Pawn)
 	{
-		_trans = Target;
-		_origine = _trans.position;
+		_origine = Pawn.GetPosition();
 		_currentOffset = Vector3.zero;
 	}
 
-	public IEnumerator ActionOverTime(Transform Target)
+	public IEnumerator ActionOverTime(PawnComponent Pawn)
 	{ 
-		Init(Target);
+		Init(Pawn);
 		for (float t = 0f, perc = 0f; perc < 1f; t += Time.fixedDeltaTime)
 		{
 			perc = Mathf.Clamp01(t / Duration);
 			_currentOffset.x = VecMove.x * perc;
 			_currentOffset.y = VecMove.y * perc;
-			_trans.position = _origine + _currentOffset;
+			Pawn.SetPosition(_origine + _currentOffset);
 			yield return _waitFixed;
 		}
 	}
 }
 
-public class ActionSpawn
+
+public class DataSpawn
 {
 	public GameObject PrefabSpawn;
 	public Vector3[] OffsetSpawn;
 	public int NSpawn;
+}
+
+public class DataWait : IAction
+{
+	float Duration;
+
+	public IEnumerator ActionOverTime(PawnComponent Pawn)
+	{
+		yield return new WaitForSeconds(Duration);
+	}
+}
+
+public class DataCurveMove
+{
+	public AnimationCurve[] Curves;
+	public float Duration;
+	public Vector2 VecMove;
 }
 
 public class ActionSelfDestruct

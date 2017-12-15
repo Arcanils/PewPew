@@ -8,6 +8,15 @@ public class MoveComponent : MonoBehaviour
 	public float SpeedX = 10;
 	public float SpeedY = 10;
 
+	public Vector3 Position
+	{
+		get { return _trans.position; }
+		set
+		{
+			_trans.position = value;
+		}
+	}
+
 	private Transform _trans;
 	private Vector3 _pos;
 

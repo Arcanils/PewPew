@@ -36,6 +36,16 @@ public class PawnComponent : MonoBehaviour
 		_moveComp.Move(DeltaMove);
 	}
 
+	public void SetPosition(Vector3 NewPosition)
+	{
+		_moveComp.Position = NewPosition;
+	}
+
+	public Vector3 GetPosition()
+	{
+		return _moveComp.Position;
+	}
+
 	public void SelfDestroy()
 	{
 
