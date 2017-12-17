@@ -23,6 +23,10 @@ public class MoveComponent : MonoBehaviour
 	private void Awake()
 	{
 		_trans = transform;
+	}
+
+	private void Start()
+	{
 		_pos = _trans.position;
 	}
 

@@ -1,0 +1,19 @@
+Bounds Game
+Tir basique Player
+Switch Ammo
+Amelio ShootComponent
+TimeComponent
+=> Area Slow
+Editeur Spawner
+Pool
+Editeur Bullet
+Score
+HUD
+Respawn
+Immortalité
+Display HP
+
+Responsive avec sprite ?
+Boss
+Decor
+FX
