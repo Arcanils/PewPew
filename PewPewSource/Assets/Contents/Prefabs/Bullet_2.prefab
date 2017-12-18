@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 114810439962773132}
   - component: {fileID: 50036654762903832}
   - component: {fileID: 61369633615185426}
+  - component: {fileID: 114177053117347974}
+  - component: {fileID: 114224296848720542}
   m_Layer: 10
   m_Name: Bullet_2
   m_TagString: Untagged
@@ -89,6 +91,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.2}
   m_EdgeRadius: 0
+--- !u!114 &114177053117347974
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1562877820651488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d42b4b70d469e847b8449785a06a730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpeedX: 10
+  SpeedY: 10
+--- !u!114 &114224296848720542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1562877820651488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a08b8cbf8c7b3a543801079acfefb565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114380638731259712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,7 +127,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: {x: 15, y: 0, z: 0}
-  DeathTime: 2
+  DeathTime: 10
+  Pawn: {fileID: 114224296848720542}
+  BehaviourData: {fileID: 11400000, guid: 558a53b0994e066428506dbe6bfb42ee, type: 2}
 --- !u!114 &114810439962773132
 MonoBehaviour:
   m_ObjectHideFlags: 1

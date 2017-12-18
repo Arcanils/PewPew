@@ -46,8 +46,13 @@ public class PawnComponent : MonoBehaviour
 		return _moveComp.Position;
 	}
 
-	public void SelfDestroy()
+	public void SetDirection(Vector3 EulerRotation)
 	{
 
+	}
+
+	public void SelfDestroy()
+	{
+		Destroy(gameObject);
 	}
 }

@@ -7,8 +7,8 @@ public class BulletController : MonoBehaviour {
 	public Vector3 Speed = new Vector3(100, 0f, 0f);
 	public float DeathTime = 2;
 	public PawnComponent Pawn;
-
-	public IAction[] ActionToDo;
+	public ActionBehaviourScriptable BehaviourData;
+	//public IAction[] ActionToDo;
 
 	public void Awake()
 	{
@@ -16,7 +16,7 @@ public class BulletController : MonoBehaviour {
 	}
 
 	public void Start()
-	{
+	{/*
 		var Duration = 0.5f;
 		var a1 = new ActionMove();
 		a1.Duration = Duration;
@@ -33,21 +33,21 @@ public class BulletController : MonoBehaviour {
 		var a5 = new ActionMove();
 		a5.Duration = Duration;
 		a5.VecMove = new Vector2(0f, 1f);
-		ActionToDo = new IAction[] { a1, a2, a3, a4, a5 };
+		ActionToDo = new IAction[] { a1, a2, a3, a4, a5 };*/
 		StartCoroutine(LogicAction());
 	}
 
 	public IEnumerator LogicAction()
 	{
-		while (true)
+		do
 		{
-			for (int i = 0; i < ActionToDo.Length; i++)
+			for (int i = 0; i < BehaviourData.Actions.Length; i++)
 			{
-				var routine = ActionToDo[i].ActionOverTime(Pawn);
+				var routine = BehaviourData.Actions[i].GetData().ActionOverTime(Pawn);
 				while (routine.MoveNext())
 					yield return new WaitForFixedUpdate();
 			}
-		}
+		} while (BehaviourData.Repeat);
 	}
 	/*
 	private void FixedUpdate()

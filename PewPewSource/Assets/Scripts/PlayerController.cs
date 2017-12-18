@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 		vecDir.x = Input.GetAxis("Horizontal");
 		vecDir.y = Input.GetAxis("Vertical");
 		Pawn.Move(vecDir * Time.fixedDeltaTime);
+		if (Input.GetButtonDown("SwitchAmmo"))
+			Pawn.SwitchAmmo();
 	}
 
 

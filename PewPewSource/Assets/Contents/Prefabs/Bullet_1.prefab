@@ -105,6 +105,7 @@ MonoBehaviour:
   Speed: {x: 5, y: 0, z: 0}
   DeathTime: 10
   Pawn: {fileID: 114553167099822808}
+  BehaviourData: {fileID: 11400000, guid: 7b625056c666a824e8e69386a548f040, type: 2}
 --- !u!114 &114139901857535080
 MonoBehaviour:
   m_ObjectHideFlags: 1

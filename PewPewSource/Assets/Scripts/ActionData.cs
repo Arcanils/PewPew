@@ -2,30 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IAction
+[System.Serializable]
+public abstract class IAction
 {
-	IEnumerator ActionOverTime(PawnComponent Pawn);
+	public abstract IEnumerator ActionOverTime(PawnComponent Pawn);
 }
 
+[System.Serializable]
 public class ActionMove : IAction
 {
 	public Vector2 VecMove;
 	public float Duration;
 
-	private Transform _trans;
-	private Vector3 _origine;
-	private Vector3 _currentOffset;
 	private static WaitForFixedUpdate _waitFixed = new WaitForFixedUpdate();
-
-	private void Init(PawnComponent Pawn)
+	
+	public override IEnumerator ActionOverTime(PawnComponent Pawn)
 	{
-		_origine = Pawn.GetPosition();
-		_currentOffset = Vector3.zero;
-	}
-
-	public IEnumerator ActionOverTime(PawnComponent Pawn)
-	{ 
-		Init(Pawn);
+		Vector3 _origine = Pawn.GetPosition();
+		Vector3 _currentOffset = Vector3.zero;
 		for (float t = 0f, perc = 0f; perc < 1f; t += Time.fixedDeltaTime)
 		{
 			perc = Mathf.Clamp01(t / Duration);
@@ -38,36 +32,63 @@ public class ActionMove : IAction
 }
 
 
-public class DataSpawn
+[System.Serializable]
+public class ActionSpawn : IAction
 {
 	public GameObject PrefabSpawn;
 	public Vector3[] OffsetSpawn;
+	public Vector3[] RotationSpawn;
 	public int NSpawn;
+
+	public override IEnumerator ActionOverTime(PawnComponent Pawn)
+	{
+		for (int i = 0; i < NSpawn; i++)
+		{
+			Spawn(PrefabSpawn, OffsetSpawn[i % OffsetSpawn.Length] + Pawn.GetPosition(), RotationSpawn[i % RotationSpawn.Length]);
+		}
+		yield break;
+	}
+
+	private static void Spawn(GameObject Prefab, Vector3 Position, Vector3 EulerRotation)
+	{
+		var instance = GameObject.Instantiate<GameObject>(Prefab, Position, Quaternion.identity);
+		var pawn = instance.GetComponent<PawnComponent>();
+		if (pawn != null)
+			pawn.SetDirection(EulerRotation);
+	}
 }
 
-public class DataWait : IAction
+[System.Serializable]
+public class ActionWait : IAction
 {
 	float Duration;
 
-	public IEnumerator ActionOverTime(PawnComponent Pawn)
+	public override IEnumerator ActionOverTime(PawnComponent Pawn)
 	{
 		yield return new WaitForSeconds(Duration);
 	}
 }
 
-public class DataCurveMove
+[System.Serializable]
+public class ActionMoveCurve : IAction
 {
 	public AnimationCurve[] Curves;
 	public float Duration;
 	public Vector2 VecMove;
+
+	public override IEnumerator ActionOverTime(PawnComponent Pawn)
+	{
+		yield break;
+	}
 }
 
-public class ActionSelfDestruct
+[System.Serializable]
+public class ActionSelfDestruct : IAction
 {
 
-}
-
-public class ActionWait
-{
-
+	public override IEnumerator ActionOverTime(PawnComponent Pawn)
+	{
+		Pawn.SelfDestroy();
+		yield break;
+	}
 }
