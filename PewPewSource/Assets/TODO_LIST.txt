@@ -20,12 +20,7 @@ FX
 
 --------------------
 
-
-Tir Simple
-Scale UP Enemy / Player
-
 Enemy spawn better / Graduel
-No tir Enemy
 Score
 Spawn + Respawn
 

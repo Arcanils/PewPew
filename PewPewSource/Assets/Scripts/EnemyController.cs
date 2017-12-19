@@ -10,7 +10,8 @@ public class EnemyController : MonoBehaviour {
 
 	public void FixedUpdate()
 	{
-		Pawn.Move(VecDir * Time.fixedDeltaTime);
+		if (Pawn != null)
+			Pawn.Move(VecDir * Time.fixedDeltaTime);
 	}
 
 }
