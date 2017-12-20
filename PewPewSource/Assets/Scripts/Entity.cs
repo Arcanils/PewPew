@@ -7,6 +7,7 @@ public class Entity : MonoBehaviour
 	public int HP;
 	public int DMG;
 	public bool ApplyDMG;
+	public int Score = 100;
 
 	public void OnCollisionEnter2D(Collision2D collision)
 	{
@@ -35,4 +36,10 @@ public class Entity : MonoBehaviour
 		OtherEntity.ReceiveAttack(this.DMG);
 	}
 
+
+	public void DestroyEntity()
+	{
+
+		Destroy(gameObject);
+	}
 }
