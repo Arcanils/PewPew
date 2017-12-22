@@ -34,5 +34,7 @@ Test pool generic et prefab
 
 Des trucs utiles
 
-
+Remove Controller mono ?
+Add GameplayLoop
+Add Spawn Player et spawner
 

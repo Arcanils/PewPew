@@ -19,6 +19,9 @@ class PoolInitializer : MonoBehaviour
 
 	public void Start()
 	{
-
+		for (int i = 0, iLength = DataPoolPrefab.Length; i < iLength; ++i)
+		{
+			Main.Instance.PoolManagerInstance.CreatePool(DataPoolPrefab[i].Prefab, DataPoolPrefab[i].SizePreload);
+		}
 	}
 }

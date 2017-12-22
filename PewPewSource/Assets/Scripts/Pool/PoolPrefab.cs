@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-class PoolPrefab
+public class PoolPrefab
 {
 	private Stack<PoolObjectComponent> _poolAvailable;
 	private List<PoolObjectComponent> _pool;
@@ -23,7 +23,9 @@ class PoolPrefab
 
 	public PoolObjectComponent GetItem()
 	{
-		return _poolAvailable.Count != 0 ? _poolAvailable.Pop() : CreateNewItem();
+		var item = _poolAvailable.Count != 0 ? _poolAvailable.Pop() : CreateNewItem();
+		item.gameObject.SetActive(true);
+		return item;
 	}
 
 	public void BackToPool(PoolObjectComponent Object)
@@ -48,7 +50,8 @@ class PoolPrefab
 		{
 			var newInstance = GameObject.Instantiate<GameObject>(_prefab, _container, true);
 			var script = newInstance.GetComponent<PoolObjectComponent>();
-			_pool[i] = script;
+			_pool.Add(script);
+			_poolAvailable.Push(script);
 			newInstance.SetActive(false);
 		}
 	}

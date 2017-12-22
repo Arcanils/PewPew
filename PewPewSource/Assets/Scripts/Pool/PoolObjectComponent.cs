@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
-class PoolObjectComponent : MonoBehaviour
+public class PoolObjectComponent : MonoBehaviour
 {
+	public System.Action OnInitFromPool;
+
 	private PoolPrefab _refPool;
 
 	public void SetPool(PoolPrefab RefPool)
@@ -12,5 +14,11 @@ class PoolObjectComponent : MonoBehaviour
 	public void BackToPool()
 	{
 		_refPool.BackToPool(this);
+	}
+
+	public void InitObject()
+	{
+		if (OnInitFromPool != null)
+			OnInitFromPool();
 	}
 }
