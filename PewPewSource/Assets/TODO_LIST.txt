@@ -17,3 +17,24 @@ Responsive avec sprite ?
 Boss
 Decor
 FX
+
+--------------------
+
+Enemy spawn better / Graduel
+Score
+Spawn + Respawn
+
+HUD
+BetterGraph
+
+Background
+
+Spawner Enemy / Move Enemy en curve facile (spline)
+Test pool generic et prefab
+
+Des trucs utiles
+
+Remove Controller mono ?
+Add GameplayLoop
+Add Spawn Player et spawner
+
