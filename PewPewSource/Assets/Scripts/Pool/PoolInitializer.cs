@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class PoolInitializer : MonoBehaviour
+public class PoolInitializer : MonoBehaviour
 {
 	[System.Serializable]
 	public struct DataPool

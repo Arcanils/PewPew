@@ -36,11 +36,14 @@ public abstract class BaseController : MonoBehaviour
 		else
 		{
 			//Bind Trans ?
+			Main.Instance.GameplayLoopInstance.SubElement(this);
 		}
 	}
 
 	public virtual void Destroy()
 	{
+		Main.Instance.GameplayLoopInstance.RemoveElement(this);
+
 		if (_refPawn)
 			_refPawn.SelfDestroy();
 

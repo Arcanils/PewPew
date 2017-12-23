@@ -61,7 +61,7 @@ public class ActionSpawn : IAction
 [System.Serializable]
 public class ActionWait : IAction
 {
-	float Duration;
+	public float Duration;
 
 	public override IEnumerator ActionOverTime(PawnComponent Pawn)
 	{
