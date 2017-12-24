@@ -19,7 +19,7 @@ public class Spawner : MonoBehaviour {
 		while(true)
 		{
 			yield return new WaitForSeconds(DurationBeforeSpawn);
-			Spawn();
+			//Spawn();
 		}
 	}
 

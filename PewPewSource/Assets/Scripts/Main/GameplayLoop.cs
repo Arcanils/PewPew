@@ -32,8 +32,8 @@ public class GameplayLoop
 				_capacity *= 2;
 				_listController.Capacity = _capacity;
 			}
-
-			_listController[_listLength++] = Element;
+			++_listLength;
+			_listController.Add(Element);
 		}
 		else
 		{

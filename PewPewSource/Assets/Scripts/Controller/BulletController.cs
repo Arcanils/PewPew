@@ -7,7 +7,6 @@ public class BulletController : BaseController
 
 	public Vector3 Speed = new Vector3(100, 0f, 0f);
 	public float DeathTime = 2;
-	public PawnComponent Pawn;
 	public ActionBehaviourScriptable BehaviourData;
 	public bool IsDisable { get; private set; }
 
@@ -18,6 +17,7 @@ public class BulletController : BaseController
 
 	public override void Init()
 	{
+		base.Init();
 		_currentIndexAction = -1;
 		IsDisable = BehaviourData.Actions.Length == 0;
 	}
@@ -55,7 +55,7 @@ public class BulletController : BaseController
 	private void SetNextAction()
 	{
 		_currentIndexAction = (_currentIndexAction + 1) % BehaviourData.Actions.Length;
-		_currentRoutine = BehaviourData.Actions[_currentIndexAction].GetData().ActionOverTime(Pawn);
+		_currentRoutine = BehaviourData.Actions[_currentIndexAction].GetData().ActionOverTime(_refPawn);
 	}
 
 	public IEnumerator LogicAction()
@@ -64,7 +64,7 @@ public class BulletController : BaseController
 		{
 			for (int i = 0; i < BehaviourData.Actions.Length; i++)
 			{
-				var routine = BehaviourData.Actions[i].GetData().ActionOverTime(Pawn);
+				var routine = BehaviourData.Actions[i].GetData().ActionOverTime(_refPawn);
 				while (routine.MoveNext())
 					yield return new WaitForFixedUpdate();
 			}

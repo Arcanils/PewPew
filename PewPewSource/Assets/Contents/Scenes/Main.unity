@@ -176,6 +176,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -220,6 +221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d19d4987797564d93ed3b16cb7e4df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerPrefab: {fileID: 114832388131376294, guid: 7cfd3fd23a3e00b4c97c5cc2f7d569ed,
+    type: 2}
 --- !u!4 &688198100
 Transform:
   m_ObjectHideFlags: 0

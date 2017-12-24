@@ -31,7 +31,12 @@ public class PoolManager
 
 	public PoolObjectComponent GetItem(PoolObjectComponent PrefabRef)
 	{
-		if (_mapPools.ContainsKey(PrefabRef) == false)
+		if (PrefabRef == null)
+		{
+			Debug.LogError("Get null ref");
+			return null;
+		}
+		else if (_mapPools.ContainsKey(PrefabRef) == false)
 		{
 			Debug.LogWarning("[" + PrefabRef + "] not present in pool");
 			CreatePool(PrefabRef, 10);

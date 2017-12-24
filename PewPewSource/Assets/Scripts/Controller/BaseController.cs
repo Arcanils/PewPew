@@ -35,7 +35,7 @@ public abstract class BaseController : MonoBehaviour
 		}
 		else
 		{
-			//Bind Trans ?
+			//Debug.LogError("BIND de " + name);
 			Main.Instance.GameplayLoopInstance.SubElement(this);
 		}
 	}

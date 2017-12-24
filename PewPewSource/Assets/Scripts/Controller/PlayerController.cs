@@ -10,6 +10,7 @@ public class PlayerController : BaseController
 
 	public override void Init()
 	{
+		base.Init();
 		vecDir = Vector2.zero;
 	}
 

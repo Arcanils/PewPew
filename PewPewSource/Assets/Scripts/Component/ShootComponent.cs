@@ -16,7 +16,7 @@ public class ShootComponent : MonoBehaviour {
 
 	private void Awake()
 	{
-		if (Ammos.Length != 0)
+		if (Ammos.Length != 0 && Ammos[0] != null)
 		{
 			CurrentAmmo = Ammos[0];
 			InvokeRepeating("Shoot", StartFire, FireRate);

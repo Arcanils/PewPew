@@ -8,6 +8,10 @@ public class Main : MonoBehaviour {
 	public PoolManager PoolManagerInstance { get; private set; }
 	public GameplayLoop GameplayLoopInstance { get; private set; }
 
+	public PoolObjectComponent PlayerPrefab;
+
+	private PlayerController _player;
+
 	public void Awake()
 	{
 		InitPoolManager();
@@ -33,7 +37,9 @@ public class Main : MonoBehaviour {
 
 	private IEnumerator MainGameplayEnum()
 	{
-		while(true)
+		yield return new WaitForSeconds(0.1f);
+		SpawnGame();
+		while (true)
 		{
 			GameplayLoopInstance.TickFixed();
 			yield return new WaitForFixedUpdate();
@@ -42,6 +48,7 @@ public class Main : MonoBehaviour {
 
 	private void SpawnGame()
 	{
-
+		var instance = PoolManagerInstance.GetItem<PlayerController>(PlayerPrefab);
+		//instance.Init();
 	}
 }

@@ -25,6 +25,7 @@ public class PoolPrefab
 	{
 		var item = _poolAvailable.Count != 0 ? _poolAvailable.Pop() : CreateNewItem();
 		item.gameObject.SetActive(true);
+		item.InitObject();
 		return item;
 	}
 
