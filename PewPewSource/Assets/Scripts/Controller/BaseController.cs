@@ -28,7 +28,7 @@ public abstract class BaseController : MonoBehaviour
 
 	public virtual void Init()
 	{
-		_refPawn = Main.Instance.PoolManagerInstance.GetItem<PawnComponent>(PawnToInstanciate);
+		_refPawn = Main.Instance.PoolManagerInstance.GetItem<PawnComponent>(PawnToInstanciate, Vector3.zero);
 		if (_refPawn == null)
 		{
 			Debug.LogError("[BaseController/Init]: Leak from pool !! Prefab whitout PawnComponent : " + PawnToInstanciate.name);

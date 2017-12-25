@@ -21,9 +21,10 @@ public class PoolPrefab
 		FillPool(Size);
 	}
 
-	public PoolObjectComponent GetItem()
+	public PoolObjectComponent GetItem(Vector3 PositionOrigine)
 	{
 		var item = _poolAvailable.Count != 0 ? _poolAvailable.Pop() : CreateNewItem();
+		item.transform.position = PositionOrigine;
 		item.gameObject.SetActive(true);
 		item.InitObject();
 		return item;
@@ -39,6 +40,7 @@ public class PoolPrefab
 		var newInstance = GameObject.Instantiate<GameObject>(_prefab, _container, true);
 		var script = newInstance.GetComponent<PoolObjectComponent>();
 		_pool.Add(script);
+		script.SetPool(this);
 		return script;
 	}
 
@@ -53,6 +55,7 @@ public class PoolPrefab
 			var script = newInstance.GetComponent<PoolObjectComponent>();
 			_pool.Add(script);
 			_poolAvailable.Push(script);
+			script.SetPool(this);
 			newInstance.SetActive(false);
 		}
 	}

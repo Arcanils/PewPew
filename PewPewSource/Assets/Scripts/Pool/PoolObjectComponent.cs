@@ -17,7 +17,10 @@ public class PoolObjectComponent : MonoBehaviour
 		if (OnResetBeforePooling != null)
 			OnResetBeforePooling();
 
-		_refPool.BackToPool(this);
+		if (_refPool == null)
+			Debug.LogError(name);
+		else
+			_refPool.BackToPool(this);
 	}
 
 	public void InitObject()

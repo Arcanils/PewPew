@@ -54,8 +54,9 @@ public class ShootComponent : MonoBehaviour {
 
 	private static void SpawnProjectile(PoolObjectComponent PrefabAmmo, Transform Container, Vector3 Position)
 	{
-		var instance = Main.Instance.PoolManagerInstance.GetItem(PrefabAmmo);
+		var instance = Main.Instance.PoolManagerInstance.GetItem(PrefabAmmo, Position);
+		/*
 		Transform instanceTrans = instance.transform;
-		instanceTrans.position = Position;
+		instanceTrans.position = Position;*/
 	}
 }

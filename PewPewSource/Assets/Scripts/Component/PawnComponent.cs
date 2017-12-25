@@ -27,6 +27,9 @@ public class PawnComponent : MonoBehaviour
 			_poolObjectComponent.OnInitFromPool += Init;
 			_poolObjectComponent.OnResetBeforePooling += Reset;
 		}
+
+		if (_moveComp)
+			_moveComp.OnOutOfBounds += SelfDestroy;
 	}
 
 	public void Init()
@@ -87,4 +90,5 @@ public class PawnComponent : MonoBehaviour
 		else
 			Destroy(gameObject);
 	}
+	
 }

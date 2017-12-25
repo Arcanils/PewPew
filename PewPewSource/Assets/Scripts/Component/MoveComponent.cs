@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveComponent : MonoBehaviour
 {
-
+	public System.Action OnOutOfBounds;
 	public float SpeedX = 10;
 	public float SpeedY = 10;
 
@@ -13,7 +13,13 @@ public class MoveComponent : MonoBehaviour
 		get { return _trans.position; }
 		set
 		{
-			_trans.position = value;
+			if (GameBounds.IsOnDeathArea(value))
+			{
+				if (OnOutOfBounds != null)
+					OnOutOfBounds();
+			}
+			else
+				_trans.position = value;
 		}
 	}
 
@@ -34,6 +40,15 @@ public class MoveComponent : MonoBehaviour
 	{
 		_pos.x += DeltaMove.x * SpeedX;
 		_pos.y += DeltaMove.y * SpeedX;
-		_trans.position = _pos;
+
+		if (GameBounds.IsOnDeathArea(_pos))
+		{
+			if (OnOutOfBounds != null)
+				OnOutOfBounds();
+		}
+		else
+			_trans.position = _pos;
+
+		
 	}
 }

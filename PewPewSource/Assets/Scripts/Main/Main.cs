@@ -48,7 +48,7 @@ public class Main : MonoBehaviour {
 
 	private void SpawnGame()
 	{
-		var instance = PoolManagerInstance.GetItem<PlayerController>(PlayerPrefab);
+		var instance = PoolManagerInstance.GetItem<PlayerController>(PlayerPrefab, Vector3.zero);
 		//instance.Init();
 	}
 }
