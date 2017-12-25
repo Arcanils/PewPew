@@ -52,9 +52,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef80ced5abc38cc469ba2fee9b692099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PawnToInstanciate: {fileID: 114942209727634900, guid: d2f6e4f5f49877c4f97dd03e7e28838e,
+    type: 2}
   Speed: {x: 5, y: 0, z: 0}
   DeathTime: 10
-  Pawn: {fileID: 0}
   BehaviourData: {fileID: 11400000, guid: 7b625056c666a824e8e69386a548f040, type: 2}
 --- !u!114 &114821761361951012
 MonoBehaviour:

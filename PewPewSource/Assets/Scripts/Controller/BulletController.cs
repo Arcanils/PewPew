@@ -20,6 +20,8 @@ public class BulletController : BaseController
 		base.Init();
 		_currentIndexAction = -1;
 		IsDisable = BehaviourData.Actions.Length == 0;
+
+		SetNextAction();
 	}
 
 	public void Start()
@@ -46,10 +48,10 @@ public class BulletController : BaseController
 
 	public override void TickFixed()
 	{
-		do
+		while (!_currentRoutine.MoveNext())
 		{
 			SetNextAction();
-		} while (!_currentRoutine.MoveNext());
+		} 
 	}
 
 	private void SetNextAction()

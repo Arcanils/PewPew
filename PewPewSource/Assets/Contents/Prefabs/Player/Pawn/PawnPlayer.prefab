@@ -246,7 +246,7 @@ MonoBehaviour:
   - {fileID: 4911809342747176}
   ContainerBullet: {fileID: 0}
   Ammos:
-  - {fileID: 114036941670713810, guid: d8fd631a243244f42adf8c894e8c61d1, type: 2}
+  - {fileID: 114821761361951012, guid: 5d6327e9e428e4146aa68e712aa7fe4e, type: 2}
   FireRate: 0.1
   StartFire: 0
   NSpawn: 2

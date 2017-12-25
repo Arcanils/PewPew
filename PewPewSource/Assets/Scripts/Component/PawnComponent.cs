@@ -23,7 +23,10 @@ public class PawnComponent : MonoBehaviour
 		_entity = GetComponent<Entity>();
 		_poolObjectComponent = GetComponent<PoolObjectComponent>();
 		if (_poolObjectComponent)
+		{
 			_poolObjectComponent.OnInitFromPool += Init;
+			_poolObjectComponent.OnResetBeforePooling += Reset;
+		}
 	}
 
 	public void Init()
@@ -33,6 +36,15 @@ public class PawnComponent : MonoBehaviour
 
 		if (_entity)
 			_entity.Init();
+
+		if (_shootComp)
+			_shootComp.Init();
+	}
+
+	public void Reset()
+	{
+		if (_shootComp)
+			_shootComp.Reset();
 	}
 
 	public void Shoot()
