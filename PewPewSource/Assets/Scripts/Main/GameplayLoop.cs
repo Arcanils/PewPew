@@ -5,12 +5,14 @@ using UnityEngine;
 public class GameplayLoop
 {
 	private List<BaseController> _listController;
+	private List<BaseController> _listControllerToRemove;
 	private int _listLength;
 	private int _capacity;
 
 	public GameplayLoop(int SizeListController = 100)
 	{
 		_listController = new List<BaseController>(SizeListController);
+		_listControllerToRemove = new List<BaseController>(SizeListController);
 		_listLength = 0;
 		_capacity = SizeListController;
 	}
@@ -21,6 +23,17 @@ public class GameplayLoop
 		{
 			_listController[i].TickFixed();
 		}
+		RemoveEntityToTick();
+	}
+
+	public void RemoveEntityToTick()
+	{
+		for (int i = 0, iLength = _listControllerToRemove.Count; i < iLength; i++)
+		{
+			_listController.Remove(_listControllerToRemove[i]);
+			--_listLength;
+		}
+		_listControllerToRemove.Clear();
 	}
 
 	public void SubElement(BaseController Element)
@@ -43,11 +56,14 @@ public class GameplayLoop
 
 	public void RemoveElement(BaseController Element)
 	{
-		var index = _listController.FindIndex(e => Element == e);
-		if (index != -1)
+		var item = _listController.Find(e => Element == e);
+		if (item)
 		{
-			_listController.RemoveAt(index);
-			--_listLength;
+			_listControllerToRemove.Add(item);
+		}
+		else
+		{
+			Debug.LogError("Remove Element not present" + Element.name);
 		}
 	}
 }

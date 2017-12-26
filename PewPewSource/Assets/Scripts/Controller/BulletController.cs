@@ -1,12 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletController : BaseController
 {
 
 	public Vector3 Speed = new Vector3(100, 0f, 0f);
-	public float DeathTime = 2;
 	public ActionBehaviourScriptable BehaviourData;
 	public bool IsDisable { get; private set; }
 
@@ -15,13 +13,26 @@ public class BulletController : BaseController
 	private IEnumerator _currentRoutine;
 	private int _currentIndexAction;
 
+	public override void Awake()
+	{
+		base.Awake();
+		IsDisable = BehaviourData.Actions.Length == 0;
+	}
+
 	public override void Init()
 	{
 		base.Init();
 		_currentIndexAction = -1;
-		IsDisable = BehaviourData.Actions.Length == 0;
 
 		SetNextAction();
+	}
+
+	public override void Reset()
+	{
+		_currentIndexAction = -1;
+		_currentRoutine = null;
+
+		base.Reset();
 	}
 
 	public void Start()
@@ -68,7 +79,7 @@ public class BulletController : BaseController
 			{
 				var routine = BehaviourData.Actions[i].GetData().ActionOverTime(_refPawn);
 				while (routine.MoveNext())
-					yield return new WaitForFixedUpdate();
+					yield return null;
 			}
 		} while (BehaviourData.Repeat);
 	}

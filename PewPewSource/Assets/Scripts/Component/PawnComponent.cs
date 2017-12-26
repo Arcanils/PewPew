@@ -25,7 +25,7 @@ public class PawnComponent : MonoBehaviour
 		if (_poolObjectComponent)
 		{
 			_poolObjectComponent.OnInitFromPool += Init;
-			_poolObjectComponent.OnResetBeforePooling += Reset;
+			_poolObjectComponent.OnResetBeforeBackToPool += Reset;
 		}
 
 		if (_moveComp)

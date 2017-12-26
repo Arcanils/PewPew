@@ -33,6 +33,7 @@ public class PoolPrefab
 	public void BackToPool(PoolObjectComponent Object)
 	{
 		_poolAvailable.Push(Object);
+		Object.gameObject.SetActive(false);
 	}
 
 	private PoolObjectComponent CreateNewItem()

@@ -6,50 +6,51 @@ public abstract class BaseController : MonoBehaviour
 {
 	public PoolObjectComponent PawnToInstanciate;
 
-
-	public System.Action OnInit;
-	public System.Action OnDestroy;
-
 	protected PawnComponent _refPawn;
 	protected PoolObjectComponent _poolObjectComponent;
 
 	public abstract void TickFixed();
 
 
-	public void Awake()
+	public virtual void Awake()
 	{
 		_poolObjectComponent = GetComponent<PoolObjectComponent>();
 
 		if (_poolObjectComponent != null)
 		{
 			_poolObjectComponent.OnInitFromPool += Init;
+			_poolObjectComponent.OnResetBeforeBackToPool += Reset;
 		}
 	}
 
 	public virtual void Init()
 	{
-		_refPawn = Main.Instance.PoolManagerInstance.GetItem<PawnComponent>(PawnToInstanciate, Vector3.zero);
+		_refPawn = Main.Instance.PoolManagerInstance.GetItem<PawnComponent>(PawnToInstanciate, transform.position);
 		if (_refPawn == null)
 		{
 			Debug.LogError("[BaseController/Init]: Leak from pool !! Prefab whitout PawnComponent : " + PawnToInstanciate.name);
 		}
 		else
 		{
-			//Debug.LogError("BIND de " + name);
+			_refPawn.OnDeath += Destroy;
 			Main.Instance.GameplayLoopInstance.SubElement(this);
+		}
+	}
+
+	public virtual void Reset()
+	{
+		Main.Instance.GameplayLoopInstance.RemoveElement(this);
+
+		if (_refPawn)
+		{
+			_refPawn.OnDeath -= Destroy;
+			//_refPawn.SelfDestroy();
+			_refPawn = null;
 		}
 	}
 
 	public virtual void Destroy()
 	{
-		Main.Instance.GameplayLoopInstance.RemoveElement(this);
-
-		if (_refPawn)
-			_refPawn.SelfDestroy();
-
-		if (OnDestroy != null)
-			OnDestroy();
-
 		if (_poolObjectComponent != null)
 			_poolObjectComponent.BackToPool();
 		else

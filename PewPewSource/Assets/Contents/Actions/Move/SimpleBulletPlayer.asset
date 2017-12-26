@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: SimpleBulletPlayer
   m_EditorClassIdentifier: Assembly-CSharp::ActionMoveScriptable
   Action:
-    VecMove: {x: 100, y: 0}
-    Duration: 4
+    VecMove: {x: 20, y: 0}
+    Duration: 0.5

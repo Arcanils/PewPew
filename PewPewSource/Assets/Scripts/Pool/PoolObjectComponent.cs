@@ -3,7 +3,7 @@
 public class PoolObjectComponent : MonoBehaviour
 {
 	public System.Action OnInitFromPool;
-	public System.Action OnResetBeforePooling;
+	public System.Action OnResetBeforeBackToPool;
 
 	private PoolPrefab _refPool;
 
@@ -14,8 +14,8 @@ public class PoolObjectComponent : MonoBehaviour
 
 	public void BackToPool()
 	{
-		if (OnResetBeforePooling != null)
-			OnResetBeforePooling();
+		if (OnResetBeforeBackToPool != null)
+			OnResetBeforeBackToPool();
 
 		if (_refPool == null)
 			Debug.LogError(name);

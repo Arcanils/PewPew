@@ -13,11 +13,6 @@ public class ShootComponent : MonoBehaviour {
 
 	private PoolObjectComponent CurrentAmmo { get; set; }
 	private int _currentIndexAmmo = 0;
-
-	private void Awake()
-	{
-		
-	}
 	
 	public void Init()
 	{
