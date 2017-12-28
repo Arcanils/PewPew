@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RoboRyanTron.Unite2017.Variables;
+using AssetsPattern;
 
 [System.Serializable]
 public class Entity : MonoBehaviour
@@ -39,7 +39,7 @@ public class Entity : MonoBehaviour
 	public void ReceiveAttack(int DMG)
 	{
 		CurrentHP.Value -= DMG;
-		if (CurrentHP <= 0)
+		if (CurrentHP.Value <= 0)
 			Destroy(gameObject);
 	}
 

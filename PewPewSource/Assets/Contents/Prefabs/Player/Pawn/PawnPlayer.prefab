@@ -261,10 +261,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343cd775a708340459329ec9a1adbaf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HPBase: 1
-  DMG: 0
+  MaxHP:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  CurrentHP:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  DMG:
+    UseConstant: 0
+    ConstantValue: 0
+    Variable: {fileID: 0}
+  TESTTT:
+    UseConstant: 1
+    ConstantValue: {x: 5, y: 0}
+    Variable: {fileID: 0}
   ApplyDMG: 0
-  Score: 100
+  Score:
+    UseConstant: 1
+    ConstantValue: 0
+    Variable: {fileID: 0}
 --- !u!114 &114718597645173824
 MonoBehaviour:
   m_ObjectHideFlags: 1

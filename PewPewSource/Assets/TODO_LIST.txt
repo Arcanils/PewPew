@@ -38,3 +38,36 @@ Remove Controller mono ?
 Add GameplayLoop
 Add Spawn Player et spawner
 
+
+------
+AssetsPattern
+JobSystem
+MVC et pas juste MV-C
+Pool Générique
+PureAbstract
+HotData/ColdData
+UI et SpriteRenderer
+Save en json
+ServiceLocator
+ByteCode
+GameLoop
+PlugginAI
+Debug
+-------------
+AssetPattern !!!
+
+Spawn Player at X
+Death Player => Spawn new Pawn
+NLives
+UI Death / Replay + Pause
+HUD Current HP / Current NLives / Score / Pause
+Background
+Spawn Enemy Simple Random Y
+SplineFollower
+SpawnerVague
+Collecteable
+
+Data Enemy
+Data Collectable
+
+
