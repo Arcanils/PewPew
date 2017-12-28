@@ -7,6 +7,7 @@ public class Main : MonoBehaviour {
 	public static Main Instance { get; private set; }
 	public PoolManager PoolManagerInstance { get; private set; }
 	public GameplayLoop GameplayLoopInstance { get; private set; }
+	public EntityFactory EntityFactoryInstance { get; private set; }
 
 	public PoolObjectComponent PlayerPrefab;
 
@@ -33,6 +34,10 @@ public class Main : MonoBehaviour {
 	private void InitGameplayLoop()
 	{
 		GameplayLoopInstance = new GameplayLoop();
+	}
+	private void InitEntityFactory()
+	{
+		EntityFactoryInstance = new EntityFactory(PoolManagerInstance);
 	}
 
 	private IEnumerator MainGameplayEnum()

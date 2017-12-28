@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseController : MonoBehaviour
+public abstract class BaseController : AbstractController
 {
-	public PoolObjectComponent PawnToInstanciate;
+	public override void SetPawn(PawnComponent Pawn)
+	{
+		if (Pawn)
+		{
+			_refPawn = Pawn;
+			_refPawn.OnDeath += Destroy;
+		}
+	}
 
-	protected PawnComponent _refPawn;
-	protected PoolObjectComponent _poolObjectComponent;
-
-	public abstract void TickFixed();
-
-
-	public virtual void Awake()
+	public override void Awake()
 	{
 		_poolObjectComponent = GetComponent<PoolObjectComponent>();
 
@@ -23,33 +24,23 @@ public abstract class BaseController : MonoBehaviour
 		}
 	}
 
-	public virtual void Init()
+	public override void Init()
 	{
-		_refPawn = Main.Instance.PoolManagerInstance.GetItem<PawnComponent>(PawnToInstanciate, transform.position);
-		if (_refPawn == null)
-		{
-			Debug.LogError("[BaseController/Init]: Leak from pool !! Prefab whitout PawnComponent : " + PawnToInstanciate.name);
-		}
-		else
-		{
-			_refPawn.OnDeath += Destroy;
-			Main.Instance.GameplayLoopInstance.SubElement(this);
-		}
+		Main.Instance.GameplayLoopInstance.SubElement(this);
 	}
 
-	public virtual void Reset()
+	public override void Reset()
 	{
 		Main.Instance.GameplayLoopInstance.RemoveElement(this);
 
 		if (_refPawn)
 		{
 			_refPawn.OnDeath -= Destroy;
-			//_refPawn.SelfDestroy();
 			_refPawn = null;
 		}
 	}
 
-	public virtual void Destroy()
+	public override void Destroy()
 	{
 		if (_poolObjectComponent != null)
 			_poolObjectComponent.BackToPool();

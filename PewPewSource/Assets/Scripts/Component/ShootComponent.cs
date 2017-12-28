@@ -5,51 +5,54 @@ using UnityEngine;
 public class ShootComponent : MonoBehaviour {
 
 	public Transform[] SpawnPoint;
-	public Transform ContainerBullet;
-	public PoolObjectComponent[] Ammos;
-	public float FireRate = 0.01f;
-	public float StartFire = 0f;
-	public int NSpawn = 1;
 
-	private PoolObjectComponent CurrentAmmo { get; set; }
+	private AmmoData CurrentAmmo { get; set; }
 	private int _currentIndexAmmo = 0;
-	
+
+	public void Awake()
+	{
+		if (SpawnPoint == null || SpawnPoint.Length == 0)
+			SpawnPoint = new Transform[] { transform };
+	}
+
 	public void Init()
 	{
-		if (Ammos.Length != 0 && Ammos[0] != null)
-		{
-			CurrentAmmo = Ammos[0];
-			InvokeRepeating("Shoot", StartFire, FireRate);
-		}
+
+	}
+
+	public void InitFire()
+	{
+		if (CurrentAmmo != null)
+			InvokeRepeating("Shoot", CurrentAmmo.FireStart, CurrentAmmo.FireRate);
 	}
 
 	public void Reset()
 	{
-		if (Ammos.Length != 0 && Ammos[0] != null)
-		{
-			CurrentAmmo = Ammos[0];
+		if (CurrentAmmo != null)
 			CancelInvoke("Shoot");
-		}
 	}
 
 
 
 	public void Shoot()
 	{
-		for (int i = 0; i < NSpawn; i++)
+		for (int i = 0; i < SpawnPoint.Length; i++)
 		{
-			SpawnProjectile(CurrentAmmo, ContainerBullet, SpawnPoint[i % SpawnPoint.Length].position);
+			SpawnProjectile(CurrentAmmo, SpawnPoint[i].position);
 		}
 	}
 
-	public void SwitchAmmo()
+	public void SwitchAmmo(AmmoData NewAmmo, bool AutoFire = false)
 	{
-		CurrentAmmo = Ammos[(++_currentIndexAmmo) % Ammos.Length];
+		CurrentAmmo = NewAmmo;
+		Reset();
+		if (AutoFire)
+			InitFire();
 	}
 
-	private static void SpawnProjectile(PoolObjectComponent PrefabAmmo, Transform Container, Vector3 Position)
+	private static void SpawnProjectile(AmmoData Ammo, Vector3 Position)
 	{
-		var instance = Main.Instance.PoolManagerInstance.GetItem(PrefabAmmo, Position);
+		var instance = Main.Instance.EntityFactoryInstance.GetNewEntity(Ammo.Bullet, Position);
 		/*
 		Transform instanceTrans = instance.transform;
 		instanceTrans.position = Position;*/

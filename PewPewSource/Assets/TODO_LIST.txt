@@ -70,4 +70,10 @@ Collecteable
 Data Enemy
 Data Collectable
 
+-----
+Hérité de PawnControllerData (A renommé ?) pour une bullet
+Instancié Le Player / Bullet
+Complet Factory
+Begin Game
+
 
