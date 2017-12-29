@@ -19,20 +19,20 @@ public class BulletController : BaseController
 		IsDisable = BehaviourData.Actions.Length == 0;
 	}
 
-	public override void Init()
+	public override void Init(ControllerComponentConfig Config)
 	{
-		base.Init();
+		base.Init(Config);
 		_currentIndexAction = -1;
 
 		SetNextAction();
 	}
 
-	public override void Reset()
+	public override void ResetAfterDisable()
 	{
 		_currentIndexAction = -1;
 		_currentRoutine = null;
 
-		base.Reset();
+		base.ResetAfterDisable();
 	}
 
 	public void Start()
@@ -59,7 +59,7 @@ public class BulletController : BaseController
 
 	public override void TickFixed()
 	{
-		while (!_currentRoutine.MoveNext())
+		while (_refPawn != null && _currentRoutine != null && !_currentRoutine.MoveNext())
 		{
 			SetNextAction();
 		} 
@@ -67,8 +67,11 @@ public class BulletController : BaseController
 
 	private void SetNextAction()
 	{
-		_currentIndexAction = (_currentIndexAction + 1) % BehaviourData.Actions.Length;
-		_currentRoutine = BehaviourData.Actions[_currentIndexAction].GetData().ActionOverTime(_refPawn);
+		if (_refPawn != null)
+		{
+			_currentIndexAction = (_currentIndexAction + 1) % BehaviourData.Actions.Length;
+			_currentRoutine = BehaviourData.Actions[_currentIndexAction].GetData().ActionOverTime(_refPawn);
+		}
 	}
 
 	public IEnumerator LogicAction()

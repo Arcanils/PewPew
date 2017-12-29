@@ -8,12 +8,6 @@ public class PlayerController : BaseController
 	private Vector2 vecDir;
 	
 
-	public override void Init()
-	{
-		base.Init();
-		vecDir = Vector2.zero;
-	}
-
 	public override void TickFixed()
 	{
 		vecDir.x = Input.GetAxis("Horizontal");

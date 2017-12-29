@@ -6,6 +6,7 @@ public class ShootComponent : MonoBehaviour {
 
 	public Transform[] SpawnPoint;
 
+	private ShootComponentConfig _config;
 	private AmmoData CurrentAmmo { get; set; }
 	private int _currentIndexAmmo = 0;
 
@@ -15,18 +16,23 @@ public class ShootComponent : MonoBehaviour {
 			SpawnPoint = new Transform[] { transform };
 	}
 
-	public void Init()
+	public void Init(ShootComponentConfig Config)
 	{
-
+		_config = Config;
+		if (_config != null && Config.Ammos.Length != 0)
+		{
+			CurrentAmmo = Config.Ammos[0];
+			if (_config.AutoFire)
+				InitFire();
+		}
 	}
 
 	public void InitFire()
 	{
-		if (CurrentAmmo != null)
-			InvokeRepeating("Shoot", CurrentAmmo.FireStart, CurrentAmmo.FireRate);
+		InvokeRepeating("Shoot", CurrentAmmo.FireStart, CurrentAmmo.FireRate);
 	}
 
-	public void Reset()
+	public void ResetAfterDisable()
 	{
 		if (CurrentAmmo != null)
 			CancelInvoke("Shoot");
@@ -45,7 +51,7 @@ public class ShootComponent : MonoBehaviour {
 	public void SwitchAmmo(AmmoData NewAmmo, bool AutoFire = false)
 	{
 		CurrentAmmo = NewAmmo;
-		Reset();
+		ResetAfterDisable();
 		if (AutoFire)
 			InitFire();
 	}

@@ -21,12 +21,14 @@ public class PoolPrefab
 		FillPool(Size);
 	}
 
-	public PoolObjectComponent GetItem(Vector3 PositionOrigine)
+	public PoolObjectComponent GetItem()
 	{
 		var item = _poolAvailable.Count != 0 ? _poolAvailable.Pop() : CreateNewItem();
+		/*
 		item.transform.position = PositionOrigine;
 		item.gameObject.SetActive(true);
 		item.InitObject();
+		*/
 		return item;
 	}
 

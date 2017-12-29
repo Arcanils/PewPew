@@ -11,8 +11,8 @@ public abstract class AbstractController : MonoBehaviour {
 
 	public abstract void TickFixed();
 
-	public abstract void Init();
-	public abstract void Reset();
+	public abstract void Init(ControllerComponentConfig Config);
+	public abstract void ResetAfterDisable();
 	public abstract void Destroy();
 
 	public abstract void SetPawn(PawnComponent Pawn);

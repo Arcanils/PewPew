@@ -29,7 +29,7 @@ public class PoolManager
 		_mapPools[PrefabToPool] = new PoolPrefab(PrefabToPool, transContainer, Size);
 	}
 
-	public PoolObjectComponent GetItem(PoolObjectComponent PrefabRef, Vector3 PositionOrigine)
+	public PoolObjectComponent GetItem(PoolObjectComponent PrefabRef)
 	{
 		if (PrefabRef == null)
 		{
@@ -41,11 +41,11 @@ public class PoolManager
 			Debug.LogWarning("[" + PrefabRef + "] not present in pool");
 			CreatePool(PrefabRef, 10);
 		}
-		return _mapPools[PrefabRef].GetItem(PositionOrigine);
+		return _mapPools[PrefabRef].GetItem();
 	}
 
-	public T GetItem<T>(PoolObjectComponent PrefabRef, Vector3 PositionOrigine)
+	public T GetItem<T>(PoolObjectComponent PrefabRef)
 	{
-		return GetItem(PrefabRef, PositionOrigine).GetComponent<T>();
+		return GetItem(PrefabRef).GetComponent<T>();
 	}
 }

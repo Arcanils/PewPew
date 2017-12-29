@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class AmmoData : ScriptableObject
+[System.Serializable]
+public class AmmoData
 {
-	public PawnControllerData Bullet;
+	public EntityConfig Bullet;
 	public float FireRate;
 	public float FireStart;
 	public int NElement;

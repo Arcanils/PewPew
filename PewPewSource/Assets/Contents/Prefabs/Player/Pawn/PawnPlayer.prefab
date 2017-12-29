@@ -244,12 +244,6 @@ MonoBehaviour:
   SpawnPoint:
   - {fileID: 4484843599691028}
   - {fileID: 4911809342747176}
-  ContainerBullet: {fileID: 0}
-  Ammos:
-  - {fileID: 114821761361951012, guid: 5d6327e9e428e4146aa68e712aa7fe4e, type: 2}
-  FireRate: 0.1
-  StartFire: 0
-  NSpawn: 2
 --- !u!114 &114678559435940062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -261,26 +255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 343cd775a708340459329ec9a1adbaf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 0}
   CurrentHP:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 0}
-  DMG:
-    UseConstant: 0
-    ConstantValue: 0
-    Variable: {fileID: 0}
-  TESTTT:
     UseConstant: 1
-    ConstantValue: {x: 5, y: 0}
-    Variable: {fileID: 0}
-  ApplyDMG: 0
-  Score:
-    UseConstant: 1
-    ConstantValue: 0
+    ConstantValue: 5
     Variable: {fileID: 0}
 --- !u!114 &114718597645173824
 MonoBehaviour:
@@ -293,8 +270,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d42b4b70d469e847b8449785a06a730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedX: 10
-  SpeedY: 10
 --- !u!212 &212347051118157132
 SpriteRenderer:
   m_ObjectHideFlags: 1

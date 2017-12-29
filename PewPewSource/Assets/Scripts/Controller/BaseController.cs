@@ -19,17 +19,16 @@ public abstract class BaseController : AbstractController
 
 		if (_poolObjectComponent != null)
 		{
-			_poolObjectComponent.OnInitFromPool += Init;
-			_poolObjectComponent.OnResetBeforeBackToPool += Reset;
+			_poolObjectComponent.OnResetBeforeBackToPool += ResetAfterDisable;
 		}
 	}
 
-	public override void Init()
+	public override void Init(ControllerComponentConfig Config)
 	{
 		Main.Instance.GameplayLoopInstance.SubElement(this);
 	}
 
-	public override void Reset()
+	public override void ResetAfterDisable()
 	{
 		Main.Instance.GameplayLoopInstance.RemoveElement(this);
 

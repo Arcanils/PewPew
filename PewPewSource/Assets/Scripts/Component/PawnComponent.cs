@@ -8,7 +8,7 @@ public class PawnComponent : MonoBehaviour
 
 	private ShootComponent _shootComp;
 	private MoveComponent _moveComp;
-	private Entity _entity;
+	private BodyComponent _bodyComp;
 	private PoolObjectComponent _poolObjectComponent;
 
 	private void Awake()
@@ -20,34 +20,33 @@ public class PawnComponent : MonoBehaviour
 	{
 		_shootComp = GetComponent<ShootComponent>();
 		_moveComp = GetComponent<MoveComponent>();
-		_entity = GetComponent<Entity>();
+		_bodyComp = GetComponent<BodyComponent>();
 		_poolObjectComponent = GetComponent<PoolObjectComponent>();
 		if (_poolObjectComponent)
 		{
-			_poolObjectComponent.OnInitFromPool += Init;
-			_poolObjectComponent.OnResetBeforeBackToPool += Reset;
+			_poolObjectComponent.OnResetBeforeBackToPool += ResetAfterDisable;
 		}
 
 		if (_moveComp)
 			_moveComp.OnOutOfBounds += SelfDestroy;
 	}
 
-	public void Init()
+	public void Init(PawnStructConfig Config)
 	{
 		if (_moveComp)
-			_moveComp.Init();
+			_moveComp.Init(Config.MoveConfig);
 
-		if (_entity)
-			_entity.Init();
+		if (_bodyComp)
+			_bodyComp.Init(Config.BodyConfig);
 
 		if (_shootComp)
-			_shootComp.Init();
+			_shootComp.Init(Config.ShootConfig);
 	}
 
-	public void Reset()
+	public void ResetAfterDisable()
 	{
 		if (_shootComp)
-			_shootComp.Reset();
+			_shootComp.ResetAfterDisable();
 	}
 
 	public void Shoot()

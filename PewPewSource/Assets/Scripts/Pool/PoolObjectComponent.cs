@@ -14,13 +14,21 @@ public class PoolObjectComponent : MonoBehaviour
 
 	public void BackToPool()
 	{
-		if (OnResetBeforeBackToPool != null)
-			OnResetBeforeBackToPool();
 
 		if (_refPool == null)
+		{
+			if (OnResetBeforeBackToPool != null)
+				OnResetBeforeBackToPool();
 			Debug.LogError(name);
+		}
 		else
+		{
+			gameObject.SetActive(false);
+
+			if (OnResetBeforeBackToPool != null)
+				OnResetBeforeBackToPool();
 			_refPool.BackToPool(this);
+		}
 	}
 
 	public void InitObject()

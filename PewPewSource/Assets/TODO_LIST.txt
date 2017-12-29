@@ -77,3 +77,6 @@ Complet Factory
 Begin Game
 
 
+--------
+shootComponent
+=> Implem CD FireRate

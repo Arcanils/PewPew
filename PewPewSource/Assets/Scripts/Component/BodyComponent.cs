@@ -4,29 +4,24 @@ using UnityEngine;
 using AssetsPattern;
 
 [System.Serializable]
-public class Entity : MonoBehaviour
+public class BodyComponent : MonoBehaviour
 {
-	public IntReference MaxHP;
-	public IntReference CurrentHP;
+	public FloatReference CurrentHP;
 
-	public IntReference DMG;
-	public Vector2Reference TESTTT;
-	public bool ApplyDMG;
+	private BodyComponentConfig _config;
 
-	public IntReference Score;
-
-
-	public void Init()
+	public void Init(BodyComponentConfig Config)
 	{
-		CurrentHP.Value = MaxHP.Value;
+		_config = Config;
+		CurrentHP.Value = _config.HP.Value;
 	}
 
 	public void OnCollisionEnter2D(Collision2D collision)
 	{
-		if (!ApplyDMG)
+		if (!_config.CanDamage)
 			return;
 
-		var OtherEntity = collision.gameObject.GetComponent<Entity>();
+		var OtherEntity = collision.gameObject.GetComponent<BodyComponent>();
 
 		if (OtherEntity)
 		{
@@ -43,9 +38,9 @@ public class Entity : MonoBehaviour
 			Destroy(gameObject);
 	}
 
-	public void LaunchAttack(Entity OtherEntity)
+	public void LaunchAttack(BodyComponent OtherEntity)
 	{
-		OtherEntity.ReceiveAttack(this.DMG.Value);
+		OtherEntity.ReceiveAttack(this._config.Damage);
 	}
 
 

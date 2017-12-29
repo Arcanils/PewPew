@@ -10,11 +10,6 @@ public class EnemyController : BaseController
 	public Vector2 VecDir;
 	
 
-	public override void Init()
-	{
-
-	}
-
 	public override void TickFixed()
 	{
 		if (_refPawn != null)

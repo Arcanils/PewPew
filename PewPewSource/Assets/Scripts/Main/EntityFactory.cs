@@ -17,18 +17,29 @@ public class EntityFactory
 	{
 		_pool = Pool;
 	}
-	public PawnComponent GetNewPawn(PawnControllerData Data, Vector3 Position)
+	public PawnComponent GetNewPawn(EntityConfig Data, Vector3 Position)
 	{
-		return null;
+		var pawnComponent = _pool.GetItem<PawnComponent>(Data.PrefabControllerPawn.Pawn);
+		pawnComponent.transform.position = Position;
+		pawnComponent.Init(Data.PawnConfig);
+		pawnComponent.gameObject.SetActive(true);
+		return pawnComponent;
 	}
 
-	public BaseController GetNewController(PawnControllerData Data, Vector3 Position)
+	public AbstractController GetNewController(EntityConfig Data, PawnComponent InstancePawn)
 	{
-		return null;
+		var controller = _pool.GetItem<AbstractController>(Data.PrefabControllerPawn.Controller);
+		controller.Init(Data.ControllerConfig);
+		controller.SetPawn(InstancePawn);
+		controller.gameObject.SetActive(true);
+		return controller;
 	}
 
-	public GameObject GetNewEntity(PawnControllerData Data, Vector3 Position)
+	public GameObject GetNewEntity(EntityConfig Data, Vector3 Position)
 	{
-		return null;
+		var Pawn = GetNewPawn(Data, Position);
+		var Controller = GetNewController(Data, Pawn);
+
+		return Controller.gameObject;
 	}
 }
