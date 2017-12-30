@@ -4,6 +4,7 @@
 /[Bb]uild/
 /[Bb]uilds/
 /PewPewSource/Assets/AssetStoreTools*
+/PewPewSource/Assets/Editor/PanicButton/reloader.cs
 
 # Visual Studio 2015 cache directory
 /PewPewSource/.vs/
