@@ -59,7 +59,10 @@ public class BulletController : BaseController
 
 	public override void TickFixed()
 	{
-		while (_refPawn != null && _currentRoutine != null && !_currentRoutine.MoveNext())
+		if (_refPawn != null && _currentRoutine == null)
+			SetNextAction();
+
+		while (!_currentRoutine.MoveNext())
 		{
 			SetNextAction();
 		} 

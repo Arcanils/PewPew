@@ -19,21 +19,10 @@ public class GameplayLoop
 
 	public void TickFixed()
 	{
-		for (int i = 0; i < _listLength; ++i)
+		for (int i = _listLength - 1; i >= 0 ; --i)
 		{
 			_listController[i].TickFixed();
 		}
-		RemoveEntityToTick();
-	}
-
-	public void RemoveEntityToTick()
-	{
-		for (int i = 0, iLength = _listControllerToRemove.Count; i < iLength; i++)
-		{
-			_listController.Remove(_listControllerToRemove[i]);
-			--_listLength;
-		}
-		_listControllerToRemove.Clear();
 	}
 
 	public void SubElement(BaseController Element)
@@ -56,10 +45,12 @@ public class GameplayLoop
 
 	public void RemoveElement(BaseController Element)
 	{
-		var item = _listController.Find(e => Element == e);
-		if (item)
+		var index = _listController.FindIndex(e => Element == e);
+		if (index != -1)
 		{
-			_listControllerToRemove.Add(item);
+			_listController.RemoveAt(index);
+
+			--_listLength;
 		}
 		else
 		{
