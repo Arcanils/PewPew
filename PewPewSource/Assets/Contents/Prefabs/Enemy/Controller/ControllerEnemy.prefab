@@ -52,8 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f221cad2da488f64988196bf1db46ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Pawn: {fileID: 0}
-  VecDir: {x: -0.2, y: 0}
+  EventsOnDeath:
+  - {fileID: 11400000, guid: 43d37006786a06d4ba652f1f9422194e, type: 2}
+  Score: {fileID: 11400000, guid: e25b83ffe3c1fca43a6f048aeaef87b8, type: 2}
+  ScoreOnDeath: 100
+  VecDir: {x: 0.5, y: 0}
 --- !u!114 &114703553056530070
 MonoBehaviour:
   m_ObjectHideFlags: 1

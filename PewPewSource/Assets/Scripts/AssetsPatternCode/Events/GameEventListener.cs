@@ -8,15 +8,13 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace RoboRyanTron.Unite2017.Events
+namespace AssetsPattern
 {
-    public class GameEventListener : MonoBehaviour
+    public abstract class GameEventListener : MonoBehaviour
     {
         [Tooltip("Event to register with.")]
         public GameEvent Event;
 
-        [Tooltip("Response to invoke when Event is raised.")]
-        public UnityEvent Response;
 
         private void OnEnable()
         {
@@ -28,9 +26,6 @@ namespace RoboRyanTron.Unite2017.Events
             Event.UnregisterListener(this);
         }
 
-        public void OnEventRaised()
-        {
-            Response.Invoke();
-        }
+		public abstract void OnEventRaised();
     }
 }

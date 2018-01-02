@@ -80,3 +80,23 @@ Begin Game
 --------
 shootComponent
 => Implem CD FireRate
+
+
+-----------
+List Event : 
+
+Player :
+
+HP-
+HP+
+
+Death
+TakeBonus
+
+End Immortalité
+
+
+Enemy
+
+Death on Screen
+End of entity

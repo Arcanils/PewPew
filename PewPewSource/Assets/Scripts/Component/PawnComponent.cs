@@ -29,6 +29,8 @@ public class PawnComponent : MonoBehaviour
 
 		if (_moveComp)
 			_moveComp.OnOutOfBounds += SelfDestroy;
+		if (_bodyComp)
+			_bodyComp.OnDeath += SelfDestroy;
 	}
 
 	public void Init(PawnStructConfig Config)
@@ -81,13 +83,17 @@ public class PawnComponent : MonoBehaviour
 
 	public void SelfDestroy()
 	{
+		if (name.Contains("Enemy"))
+			Debug.LogError("ENEMY PAWN DEAD !");
 		if (OnDeath != null)
 			OnDeath();
 
 		if (_poolObjectComponent != null)
 			_poolObjectComponent.BackToPool();
 		else
+		{
 			Destroy(gameObject);
+		}
 	}
 	
 }

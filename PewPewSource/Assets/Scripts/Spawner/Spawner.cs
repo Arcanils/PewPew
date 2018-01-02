@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour {
 
-	public GameObject PrefabEnemy;
+	public EntityConfig PrefabEnemy;
 	public Transform ContainerEnemy;
 	public Transform[] SpawnPoints;
 	public float DurationBeforeSpawn = 0.5f;
@@ -19,15 +19,13 @@ public class Spawner : MonoBehaviour {
 		while(true)
 		{
 			yield return new WaitForSeconds(DurationBeforeSpawn);
-			//Spawn();
+			Spawn();
 		}
 	}
 
 	private void Spawn()
 	{
 		int randomIndex = Random.Range(0, SpawnPoints.Length);
-		var instance = GameObject.Instantiate<GameObject>(PrefabEnemy, ContainerEnemy, true);
-		var instanceTrans = instance.transform;
-		instanceTrans.position = SpawnPoints[randomIndex].position;
+		var instance = Main.Instance.EntityFactoryInstance.GetNewEntity(PrefabEnemy, SpawnPoints[randomIndex].position);
 	}
 }
