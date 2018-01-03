@@ -83,8 +83,6 @@ public class PawnComponent : MonoBehaviour
 
 	public void SelfDestroy()
 	{
-		if (name.Contains("Enemy"))
-			Debug.LogError("ENEMY PAWN DEAD !");
 		if (OnDeath != null)
 			OnDeath();
 

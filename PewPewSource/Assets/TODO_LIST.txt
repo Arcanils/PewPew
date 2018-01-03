@@ -1,5 +1,3 @@
-Bounds Game
-Tir basique Player
 Switch Ammo
 Amelio ShootComponent
 TimeComponent
@@ -70,11 +68,6 @@ Collecteable
 Data Enemy
 Data Collectable
 
------
-Hérité de PawnControllerData (A renommé ?) pour une bullet
-Instancié Le Player / Bullet
-Complet Factory
-Begin Game
 
 
 --------
@@ -100,3 +93,6 @@ Enemy
 
 Death on Screen
 End of entity
+
+
+http://catlikecoding.com/unity/tutorials/curves-and-splines/

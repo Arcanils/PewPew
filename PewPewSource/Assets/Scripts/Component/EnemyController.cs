@@ -20,7 +20,6 @@ public class EnemyController : BaseController
 
 	public override void ResetAfterDisable()
 	{
-		Debug.LogError("ENEMY CONTROLLER DEAD !");
 		base.ResetAfterDisable();
 		Score.Value += ScoreOnDeath;
 		if (EventsOnDeath != null)

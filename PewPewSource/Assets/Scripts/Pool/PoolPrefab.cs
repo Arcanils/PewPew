@@ -24,8 +24,6 @@ public class PoolPrefab
 	public PoolObjectComponent GetItem()
 	{
 		var item = _poolAvailable.Count != 0 ? _poolAvailable.Pop() : CreateNewItem();
-		if (_prefab.name.Contains("Enemy"))
-			Debug.LogError("POP ! [" + _prefab.name + "] available : " + _poolAvailable.Count);
 		/*
 		item.transform.position = PositionOrigine;
 		item.gameObject.SetActive(true);
@@ -37,8 +35,6 @@ public class PoolPrefab
 	public void BackToPool(PoolObjectComponent Object)
 	{
 		_poolAvailable.Push(Object);
-		if (_prefab.name.Contains ("Enemy"))
-			Debug.LogError("Return ! [" + _prefab.name + "] available : " + _poolAvailable.Count);
 		Object.gameObject.SetActive(false);
 	}
 
