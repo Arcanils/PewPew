@@ -96,3 +96,25 @@ End of entity
 
 
 http://catlikecoding.com/unity/tutorials/curves-and-splines/
+
+---------
+
+Spline:
+
+Transformer la spline en scriptable avec plus de tools
+Ajouter index points
+Differencier point controle des points
+Pouvoir get une valeur du path pour une vitesse fix
+Test avec le % actuel pour voir si une vague d'enemy rend suffisament bien
+Test Curve avec un bouton pour fake un enemy move
+Simulation de points de curve pour éviter de test la curve
+
+Curve appliqué aux enemy, bullet, UI ?
+
+------
+Gameloop
+
+Move Groupe Entity in order
+Player
+Enemy
+Bullet
