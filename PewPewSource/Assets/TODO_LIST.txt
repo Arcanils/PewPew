@@ -118,3 +118,20 @@ Move Groupe Entity in order
 Player
 Enemy
 Bullet
+----
+
+MoveCompo
+
+SetPosition par frame
+ou follow direction avec une time donné ou set
+Set Dir a la factory
+
+------
+
+Spawner lvl
+
+Array d'action à la suite. Bloquante ou non
+
+ou
+
+Arbre d'action parallèle. Bloquant ou non
