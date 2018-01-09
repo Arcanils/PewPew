@@ -1,7 +1,8 @@
 ﻿using System;
 using UnityEngine;
 
-public class BezierSpline : MonoBehaviour
+[CreateAssetMenu]
+public class BezierSpline : ScriptableObject
 {
     [SerializeField]
     private Vector3[] points;
@@ -164,9 +165,11 @@ public class BezierSpline : MonoBehaviour
             t -= i;
             i *= 3;
         }
+		/*
         return transform.TransformPoint(Bezier.GetPoint(
-            points[i], points[i + 1], points[i + 2], points[i + 3], t));
-    }
+            points[i], points[i + 1], points[i + 2], points[i + 3], t));*/
+		return Bezier.GetPoint(points[i], points[i + 1], points[i + 2], points[i + 3], t);
+	}
 
     public Vector3 GetVelocity(float t)
     {
@@ -182,10 +185,11 @@ public class BezierSpline : MonoBehaviour
             i = (int)t;
             t -= i;
             i *= 3;
-        }
+		}/*
         return transform.TransformPoint(Bezier.GetFirstDerivative(
-            points[i], points[i + 1], points[i + 2], points[i + 3], t)) - transform.position;
-    }
+            points[i], points[i + 1], points[i + 2], points[i + 3], t)) - transform.position;*/
+		return Bezier.GetFirstDerivative(points[i], points[i + 1], points[i + 2], points[i + 3], t);
+	}
 
     public Vector3 GetDirection(float t)
 	{

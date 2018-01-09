@@ -24,10 +24,31 @@ public class BezierSplineInspector : Editor
         Color.cyan
     };
 
-    private void OnSceneGUI()
+	private static GameObject _hackObject;
+	private void OnEnable()
+	{
+		if (_hackObject == null)
+		{
+			SceneView.onSceneGUIDelegate += OnSceneGUI;
+			Debug.Log("Creating Object");
+			_hackObject = new GameObject();
+			_hackObject.hideFlags = HideFlags.HideAndDontSave;
+		}
+	}
+	private void OnDisable()
+	{
+		if (_hackObject != null)
+		{
+			SceneView.onSceneGUIDelegate -= OnSceneGUI;
+			Debug.Log("Destroying Object");
+			DestroyImmediate(_hackObject);
+		}
+	}
+
+	private void OnSceneGUI(SceneView sceneView)
     {
         spline = target as BezierSpline;
-        handleTransform = spline.transform;
+        handleTransform = _hackObject.transform;
         handleRotation = Tools.pivotRotation == PivotRotation.Local ?
             handleTransform.rotation : Quaternion.identity;
 

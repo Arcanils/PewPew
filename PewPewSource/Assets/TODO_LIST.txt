@@ -111,6 +111,23 @@ Simulation de points de curve pour éviter de test la curve
 
 Curve appliqué aux enemy, bullet, UI ?
 
+
+
+Prev , next, select Node
+Index Node Scene + Editor,
+Beg, End,
+ToolEditParamTools
+Add Ref Rotation / Position for the spline ? Transform point ?
+TestPerf with 100 following same Path
+TestPErf with 100 following 100 path
+Test LengthPath
+
+RemoveTransform Ref ?
+
+
+
+Vec3 -> Vec2
+
 ------
 Gameloop
 
