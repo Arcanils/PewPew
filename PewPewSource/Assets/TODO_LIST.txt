@@ -113,8 +113,6 @@ Curve appliqué aux enemy, bullet, UI ?
 
 
 
-Prev , next, select Node
-Index Node Scene + Editor,
 Beg, End,
 ToolEditParamTools
 Add Ref Rotation / Position for the spline ? Transform point ?
