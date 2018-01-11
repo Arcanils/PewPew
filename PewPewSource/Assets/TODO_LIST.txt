@@ -150,3 +150,22 @@ Array d'action à la suite. Bloquante ou non
 ou
 
 Arbre d'action parallèle. Bloquant ou non
+
+
+
+----------------
+
+MoveComponentAbstract ou multi compo ou super compo
+
+SimpleMove => VecAssigned
+SplineMove => Attribution d'une spline + set
+Cos / Sin / AnimCruve Move
+
+
+-----
+
+Camera Y
+
+
+
+
