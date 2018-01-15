@@ -33,8 +33,8 @@ public class GameCamera : MonoBehaviour
 				if (ListEntityToWatch.Items[i] != null)
 					Center += ListEntityToWatch.Items[i].PawnPosition.y;
 			}
-			
-			Center = Mathf.Clamp(Center / ListEntityToWatch.Items.Count, -OffsetY, OffsetY);
+			Center /= ListEntityToWatch.Items.Count;
+			//Center = Mathf.Clamp(Center, -OffsetY, OffsetY);
 		}
 
 		_transCam.position = new Vector3(_transCam.position.x, Center, _transCam.position.z);
