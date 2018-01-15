@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AbstractController : MonoBehaviour {
+public abstract class AbstractController : MonoBehaviour
+{
 
 	protected PawnComponent _refPawn;
 	protected PoolObjectComponent _poolObjectComponent;
+	protected ControllerComponentConfig _config;
 
 	public abstract void Awake();
 

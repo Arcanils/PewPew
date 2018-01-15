@@ -8,6 +8,10 @@ public class Main : MonoBehaviour
 
 	public LvlConfig[] LvlConfigs;
 
+	[SerializeField]
+	private GameCamera PrefabCam;
+
+	public GameCamera GameCameraInstance { get; private set; }
 	public PoolManager PoolManagerInstance { get; private set; }
 	public GameplayLoop GameplayLoopInstance { get; private set; }
 	public EntityFactory EntityFactoryInstance { get; private set; }
@@ -17,6 +21,7 @@ public class Main : MonoBehaviour
 	public void Awake()
 	{
 		InitPoolManager();
+		InitCamera();
 		InitGameplayLoop();
 		InitEntityFactory();
 		InitLoaderLvl();
@@ -34,9 +39,15 @@ public class Main : MonoBehaviour
 		var transContainer = goContainer.transform;
 		PoolManagerInstance = new PoolManager(transContainer);
 	}
+
+	private void InitCamera()
+	{
+		GameCameraInstance = GameObject.Instantiate<GameCamera>(PrefabCam);
+	}
+
 	private void InitGameplayLoop()
 	{
-		GameplayLoopInstance = new GameplayLoop();
+		GameplayLoopInstance = new GameplayLoop(GameCameraInstance);
 	}
 	private void InitEntityFactory()
 	{

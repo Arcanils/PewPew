@@ -4,6 +4,15 @@ using UnityEngine;
 
 public abstract class BaseController : AbstractController
 {
+
+	public Vector3 PawnPosition
+	{
+		get
+		{
+			return _refPawn.GetPosition();
+		}
+	}
+
 	public override void SetPawn(PawnComponent Pawn)
 	{
 		if (Pawn)
@@ -25,6 +34,15 @@ public abstract class BaseController : AbstractController
 
 	public override void Init(ControllerComponentConfig Config)
 	{
+		_config = Config;
+		if (_config != null && _config.WatcherSets != null && _config.WatcherSets.Length > 0)
+		{
+			for (int i = _config.WatcherSets.Length - 1; i >= 0; --i)
+			{
+				_config.WatcherSets[i].Add(this);
+				Debug.LogError(this.GetType());
+			}
+		}
 		Main.Instance.GameplayLoopInstance.SubElement(this);
 	}
 
@@ -37,6 +55,17 @@ public abstract class BaseController : AbstractController
 			_refPawn.OnDeath -= Destroy;
 			_refPawn = null;
 		}
+
+		if (_config != null && _config.WatcherSets != null && _config.WatcherSets.Length > 0)
+		{
+			for (int i = _config.WatcherSets.Length - 1; i >= 0; --i)
+			{
+				_config.WatcherSets[i].Remove(this);
+				Debug.LogError(this.GetType());
+			}
+		}
+
+		_config = null;
 	}
 
 	public override void Destroy()

@@ -5,14 +5,15 @@ using UnityEngine;
 public class GameplayLoop
 {
 	private List<BaseController> _listController;
-	private List<BaseController> _listControllerToRemove;
 	private int _listLength;
 	private int _capacity;
+	private GameCamera _cam;
 
-	public GameplayLoop(int SizeListController = 100)
+	public GameplayLoop(GameCamera CameraLogic, int SizeListController = 100)
 	{
+		_cam = CameraLogic;
+
 		_listController = new List<BaseController>(SizeListController);
-		_listControllerToRemove = new List<BaseController>(SizeListController);
 		_listLength = 0;
 		_capacity = SizeListController;
 	}
@@ -23,6 +24,8 @@ public class GameplayLoop
 		{
 			_listController[i].TickFixed();
 		}
+
+		_cam.UpdatePosCam();
 	}
 
 	public void SubElement(BaseController Element)
