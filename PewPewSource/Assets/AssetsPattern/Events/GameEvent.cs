@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AssetsPattern
 {
-    [CreateAssetMenu(fileName="GameEvent",  menuName="Event/GameEvent")]
+    [CreateAssetMenu(fileName="GameEvent",  menuName= "AssetsPattern/Event/GameEvent")]
     public class GameEvent : ScriptableObject
     {
         /// <summary>
