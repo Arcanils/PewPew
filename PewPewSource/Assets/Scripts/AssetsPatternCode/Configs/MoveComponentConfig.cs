@@ -6,4 +6,5 @@ using UnityEngine;
 public class MoveComponentConfig
 {
 	public Vector2 Move;
+	public bool BlockedOnScreen;
 }

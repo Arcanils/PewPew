@@ -638,7 +638,7 @@ GameObject:
   - component: {fileID: 1152313588}
   - component: {fileID: 1152313587}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GameBounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -655,7 +655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc015fddb2d1b634a9a89154a85bf19c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DistanceAreaBeforeDeath: 3
+  DistanceAreaBeforeDeath: 8
 --- !u!4 &1152313588
 Transform:
   m_ObjectHideFlags: 0

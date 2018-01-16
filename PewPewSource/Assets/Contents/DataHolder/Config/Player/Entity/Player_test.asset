@@ -27,6 +27,7 @@ MonoBehaviour:
       Damage: 0
     MoveConfig:
       Move: {x: 10, y: 10}
+      BlockedOnScreen: 1
     ShootConfig:
       Ammos:
       - Bullet: {fileID: 11400000, guid: 9aaa5514ec3804043b06da88c924dd1a, type: 2}

@@ -8,16 +8,11 @@ public class MoveComponent : MonoBehaviour
 
 	public Vector3 Position
 	{
-		get { return _trans.position; }
+		get { return _pos; }
 		set
 		{
-			if (GameBounds.IsOnDeathArea(value))
-			{
-				if (OnOutOfBounds != null)
-					OnOutOfBounds();
-			}
-			else
-				_trans.position = value;
+			_pos = value;
+			SetPosition();
 		}
 	}
 
@@ -41,14 +36,26 @@ public class MoveComponent : MonoBehaviour
 		_pos.x += DeltaMove.x * _config.Move.x;
 		_pos.y += DeltaMove.y * _config.Move.y;
 
-		if (GameBounds.IsOnDeathArea(_pos))
+		SetPosition();
+	}
+
+	private void SetPosition()
+	{
+		if (_config != null && _config.BlockedOnScreen)
 		{
-			if (OnOutOfBounds != null)
-				OnOutOfBounds();
+			GameBounds.ClampsThisPosition(ref _pos);
+
+			_trans.position = _pos;
 		}
 		else
-			_trans.position = _pos;
-
-		
+		{
+			if (GameBounds.IsOnDeathArea(_pos))
+			{
+				if (OnOutOfBounds != null)
+					OnOutOfBounds();
+			}
+			else
+				_trans.position = _pos;
+		}
 	}
 }

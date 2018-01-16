@@ -24,6 +24,11 @@ public class GameCamera : MonoBehaviour
 
 	public void UpdatePosCam()
 	{
+		//NONE
+	}
+
+	public void UpdateFollowingCam()
+	{
 		float Center = 0f;
 		if (ListEntityToWatch != null && ListEntityToWatch.Items.Count > 0)
 		{

@@ -9,6 +9,10 @@ public class GameBounds : MonoBehaviour {
 	private static Vector3 _TR;
 	private static Vector3 _BL;
 	private static Vector3 _BR;
+	private static Vector3 _camTL;
+	private static Vector3 _camTR;
+	private static Vector3 _camBL;
+	private static Vector3 _camBR;
 	private static Rect _rectSafeArea;
 
 	private static Transform _camTrans;
@@ -32,8 +36,13 @@ public class GameBounds : MonoBehaviour {
 	}
 	private static void InitGround(float DistanceAreaBeforeDeath)
 	{
-		var frustumHeight = 2.0f * -+_camTrans.position.z * Mathf.Tan(_cam.fieldOfView * 0.5f * Mathf.Deg2Rad);
-		var frustumWidth = frustumHeight * _cam.aspect + DistanceAreaBeforeDeath;
+		var frustumHeight = _cam.orthographicSize * 2;
+		var frustumWidth = frustumHeight * _cam.aspect;
+		_camTL = new Vector3(frustumWidth / -2f + _camTrans.position.x, frustumHeight / 2f + _camTrans.position.y, 0f);
+		_camTR = new Vector3(frustumWidth / 2f + _camTrans.position.x, frustumHeight / 2f + _camTrans.position.y, 0f);
+		_camBL = new Vector3(frustumWidth / -2f + _camTrans.position.x, frustumHeight / -2f + _camTrans.position.y, 0f);
+		_camBR = new Vector3(frustumWidth / 2f + _camTrans.position.x, frustumHeight / -2f + _camTrans.position.y, 0f);
+		frustumWidth += DistanceAreaBeforeDeath;
 		frustumHeight += DistanceAreaBeforeDeath;
 		_TL = new Vector3(frustumWidth / -2f + _camTrans.position.x, frustumHeight / 2f + _camTrans.position.y, 0f);
 		_TR = new Vector3(frustumWidth / 2f + _camTrans.position.x, frustumHeight / 2f + _camTrans.position.y, 0f);
@@ -48,10 +57,21 @@ public class GameBounds : MonoBehaviour {
 		Gizmos.DrawLine(_BR, _TR);
 		Gizmos.DrawLine(_BR, _BL);
 		Gizmos.DrawLine(_TL, _BL);
+
+		Gizmos.DrawLine(_camTL, _camTR);
+		Gizmos.DrawLine(_camBR, _camTR);
+		Gizmos.DrawLine(_camBR, _camBL);
+		Gizmos.DrawLine(_camTL, _camBL);
 	}
 	
 	public static bool IsOnDeathArea(Vector3 PositionToTest)
 	{
 		return !_rectSafeArea.Contains(PositionToTest);
+	}
+
+	public static void ClampsThisPosition(ref Vector3 PositionToClamp)
+	{
+		PositionToClamp.x = Mathf.Clamp(PositionToClamp.x, _camBL.x, _camTR.x);
+		PositionToClamp.y = Mathf.Clamp(PositionToClamp.y, _camBL.y, _camTR.y);
 	}
 }
