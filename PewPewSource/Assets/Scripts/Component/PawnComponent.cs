@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -93,5 +94,10 @@ public class PawnComponent : MonoBehaviour
 			Destroy(gameObject);
 		}
 	}
-	
+
+	public void TickShoot(float DeltaTime)
+	{
+		if (_shootComp)
+			_shootComp.Tick(DeltaTime);
+	}
 }

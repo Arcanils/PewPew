@@ -74,4 +74,19 @@ public abstract class BaseController : AbstractController
 		else
 			Destroy(gameObject);
 	}
+
+	public override void TickMove(float DeltaTime)
+	{
+		//Move
+	}
+
+	public override void TickEntity(float DeltaTime)
+	{
+		//Entity
+	}
+
+	public override void TickShoot(float DeltaTime)
+	{
+		_refPawn.TickShoot(DeltaTime);
+	}
 }

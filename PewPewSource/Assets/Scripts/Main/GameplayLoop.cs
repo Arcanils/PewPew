@@ -20,9 +20,22 @@ public class GameplayLoop
 
 	public void TickFixed()
 	{
+		float DeltaTime = Time.fixedDeltaTime;
 		for (int i = _listLength - 1; i >= 0 ; --i)
 		{
-			_listController[i].TickFixed();
+			_listController[i].TickAI(DeltaTime);
+		}
+		for (int i = _listLength - 1; i >= 0; --i)
+		{
+			_listController[i].TickMove(DeltaTime);
+		}
+		for (int i = _listLength - 1; i >= 0; --i)
+		{
+			_listController[i].TickEntity(DeltaTime);
+		}
+		for (int i = _listLength - 1; i >= 0; --i)
+		{
+			_listController[i].TickShoot(DeltaTime);
 		}
 
 		_cam.UpdatePosCam();

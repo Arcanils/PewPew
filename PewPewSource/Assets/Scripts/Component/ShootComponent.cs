@@ -9,6 +9,7 @@ public class ShootComponent : MonoBehaviour {
 	private ShootComponentConfig _config;
 	private AmmoData CurrentAmmo { get; set; }
 	private int _currentIndexAmmo = 0;
+	private float _timerFire;
 
 	public void Awake()
 	{
@@ -29,19 +30,35 @@ public class ShootComponent : MonoBehaviour {
 
 	public void InitFire()
 	{
-		InvokeRepeating("Shoot", CurrentAmmo.FireStart, CurrentAmmo.FireRate);
+		_timerFire = -CurrentAmmo.FireRate;
+		//InvokeRepeating("Shoot", CurrentAmmo.FireStart, CurrentAmmo.FireRate);
+	}
+
+	public void Tick(float DeltaTime)
+	{
+		_timerFire += DeltaTime;
+		if (_timerFire > 0f && _config.AutoFire)
+		{
+			_Shoot();
+		}
 	}
 
 	public void ResetAfterDisable()
 	{
+		/*
 		if (CurrentAmmo != null)
-			CancelInvoke("Shoot");
+			CancelInvoke("Shoot");*/
 	}
-
-
 
 	public void Shoot()
 	{
+		if (_timerFire > 0f)
+			_Shoot();
+	}
+
+	private void _Shoot()
+	{
+		_timerFire = -CurrentAmmo.FireRate;
 		for (int i = 0; i < SpawnPoint.Length; i++)
 		{
 			SpawnProjectile(CurrentAmmo, SpawnPoint[i].position);

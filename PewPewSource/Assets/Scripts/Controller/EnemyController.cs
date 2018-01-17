@@ -12,10 +12,10 @@ public class EnemyController : BaseController
 	public Vector2 VecDir;
 	
 
-	public override void TickFixed()
+	public override void TickAI(float DeltaTime)
 	{
 		if (_refPawn != null)
-			_refPawn.Move(VecDir * Time.fixedDeltaTime);
+			_refPawn.Move(VecDir * DeltaTime);
 	}
 
 	public override void ResetAfterDisable()

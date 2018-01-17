@@ -11,7 +11,11 @@ public abstract class AbstractController : MonoBehaviour
 
 	public abstract void Awake();
 
-	public abstract void TickFixed();
+	public abstract void TickAI(float DeltaTime);
+
+	public abstract void TickMove(float DeltaTime);
+	public abstract void TickEntity(float DeltaTime);
+	public abstract void TickShoot(float DeltaTime);
 
 	public abstract void Init(ControllerComponentConfig Config);
 	public abstract void ResetAfterDisable();

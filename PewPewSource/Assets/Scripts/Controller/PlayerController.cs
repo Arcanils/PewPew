@@ -17,12 +17,12 @@ public class PlayerController : BaseController
 		_inputNameMoveX = IndexPlayer >= 0 ? "Horizontal_" + IndexPlayer : "Horizontal";
 		_inputNameMoveY = IndexPlayer >= 0 ? "Vertical_" + IndexPlayer : "Vertical";
 	}
-	public override void TickFixed()
+	public override void TickAI(float DeltaTime)
 	{
 		vecDir.x = Input.GetAxis(_inputNameMoveX);
 		vecDir.y = Input.GetAxis(_inputNameMoveY);
 		if (vecDir != Vector2.zero)
-			vecDir.Normalize();
+			vecDir = vecDir.normalized * vecDir.magnitude;
 		_refPawn.Move(vecDir * Time.fixedDeltaTime);
 		/*
 		if (Input.GetButtonDown("SwitchAmmo"))

@@ -57,7 +57,7 @@ public class BulletController : BaseController
 		//StartCoroutine(LogicAction());
 	}
 
-	public override void TickFixed()
+	public override void TickAI(float DeltaTime)
 	{
 		if (_refPawn != null && _currentRoutine == null)
 			SetNextAction();
