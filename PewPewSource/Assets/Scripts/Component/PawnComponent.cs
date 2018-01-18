@@ -62,9 +62,9 @@ public class PawnComponent : MonoBehaviour
 		_shootComp.SwitchAmmo(NewAmmo, AutoFire);
 	}
 
-	public void Move(Vector2 DeltaMove)
+	public void Move(float SpeedX, float SpeedY, float DeltaTime)
 	{
-		_moveComp.Move(DeltaMove);
+		_moveComp.Move(SpeedX, SpeedY, DeltaTime);
 	}
 
 	public void SetPosition(Vector3 NewPosition)

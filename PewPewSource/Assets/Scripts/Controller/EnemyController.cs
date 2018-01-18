@@ -8,14 +8,15 @@ public class EnemyController : BaseController
 	public GameEvent[] EventsOnDeath;
 	public IntVariable Score;
 	public int ScoreOnDeath;
-	
-	public Vector2 VecDir;
+
+	public float SpeedX;
+	public float SpeedY;
 	
 
 	public override void TickAI(float DeltaTime)
 	{
 		if (_refPawn != null)
-			_refPawn.Move(VecDir * DeltaTime);
+			_refPawn.Move(SpeedX, SpeedY, DeltaTime);
 	}
 
 	public override void ResetAfterDisable()

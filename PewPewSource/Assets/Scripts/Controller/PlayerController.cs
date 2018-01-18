@@ -23,7 +23,7 @@ public class PlayerController : BaseController
 		vecDir.y = Input.GetAxis(_inputNameMoveY);
 		if (vecDir != Vector2.zero)
 			vecDir = vecDir.normalized * vecDir.magnitude;
-		_refPawn.Move(vecDir * Time.fixedDeltaTime);
+		_refPawn.Move(vecDir.x, vecDir.y, Time.fixedDeltaTime);
 		/*
 		if (Input.GetButtonDown("SwitchAmmo"))
 			_refPawn.SwitchAmmo();
