@@ -9,5 +9,6 @@ public class BodyComponentConfig
 	public FloatReference HP;
 	public bool IsImmortal;
 	public bool CanDamage;
-	public int Damage;
+	public float Damage;
+	public float DurationImmortal;
 }

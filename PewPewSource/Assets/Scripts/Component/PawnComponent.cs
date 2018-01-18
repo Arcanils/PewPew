@@ -100,4 +100,10 @@ public class PawnComponent : MonoBehaviour
 		if (_shootComp)
 			_shootComp.Tick(DeltaTime);
 	}
+
+	public void TickBody(float DeltaTime)
+	{
+		if (_bodyComp)
+			_bodyComp.Tick(DeltaTime);
+	}
 }

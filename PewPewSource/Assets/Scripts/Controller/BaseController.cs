@@ -82,7 +82,7 @@ public abstract class BaseController : AbstractController
 
 	public override void TickEntity(float DeltaTime)
 	{
-		//Entity
+		_refPawn.TickBody(DeltaTime);
 	}
 
 	public override void TickShoot(float DeltaTime)

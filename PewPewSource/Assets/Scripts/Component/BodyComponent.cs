@@ -10,10 +10,14 @@ public class BodyComponent : MonoBehaviour
 	public FloatReference CurrentHP;
 	private BodyComponentConfig _config;
 	private bool _deadOne;
+	private float _timeImmortal;
+	private bool _isMortal;
+	private bool _isInvicibleByConfig;
 
 	public void Init(BodyComponentConfig Config)
 	{
 		_config = Config;
+		_isInvicibleByConfig = !_config.IsImmortal;
 		CurrentHP.Value = _config.HP.Value;
 		_deadOne = false;
 	}
@@ -33,12 +37,32 @@ public class BodyComponent : MonoBehaviour
 		RaiseDeathEvent();
 	}
 
-	public void ReceiveAttack(int DMG)
+	public void ReceiveAttack(float DMG)
 	{
-		CurrentHP.Value -= DMG;
-		if (CurrentHP.Value <= 0)
+		if (_isMortal)
 		{
-			RaiseDeathEvent();
+			CurrentHP.Value -= DMG;
+			if (CurrentHP.Value <= 0)
+			{
+				RaiseDeathEvent();
+			}
+			else if (_config.DurationImmortal > 0f)
+			{
+				_isMortal = false;
+				_timeImmortal = _config.DurationImmortal;
+			}
+		}
+	}
+
+	public void Tick(float DeltaTime)
+	{
+		if (!_isInvicibleByConfig && !_isMortal)
+		{
+			_timeImmortal += DeltaTime;
+			if (_timeImmortal >= 0f)
+			{
+				_isMortal = true;
+			}
 		}
 	}
 
