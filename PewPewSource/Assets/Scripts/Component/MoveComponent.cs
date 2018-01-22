@@ -13,16 +13,27 @@ public class MoveComponent : MonoBehaviour
 
 	public Vector3 Position
 	{
-		get { return _pos; }
+		get { return _deltaPos; }
 		set
 		{
-			_pos = value;
+			_deltaPos = value;
 			SetPosition();
 		}
 	}
 
+	public Quaternion Direction
+	{
+		get { return _dir; }
+		set
+		{
+			_dir = value;
+		}
+	}
+
 	private Transform _trans;
-	private Vector3 _pos;
+	private Vector3 _deltaPos;
+	private Vector3 _currentPos;
+	private Quaternion _dir;
 	private MoveComponentConfig _config;
 	private BezierSpline _curveToEvaluate;
 
@@ -47,8 +58,9 @@ public class MoveComponent : MonoBehaviour
 	public void Init(MoveComponentConfig Config)
 	{
 		_config = Config;
-		_pos = _trans.position;
+		_currentPos = _trans.position;
 		_typeMove = (int)ETypeMove.Manual;
+		_dir = Quaternion.Euler(Config.Direction);
 	}
 
 	public void Move(float SpeedX, float SpeedY, float DeltaTime)
@@ -72,34 +84,36 @@ public class MoveComponent : MonoBehaviour
 		_percSpline += DeltaTime * SpeedX;
 		_prevPoint = _currentPoint;
 		_currentPoint = _curveToEvaluate.GetPoint(_percSpline);
-		_pos += _currentPoint - _prevPoint;
+		_deltaPos += _currentPoint - _prevPoint;
 	}
 
 	private void ManualMove(float SpeedX, float SpeedY, float DeltaTime)
 	{
-		_pos.x += SpeedX * _config.Move.x;
-		_pos.y += SpeedY * _config.Move.y;
+		_deltaPos.x += SpeedX * _config.Move.x * DeltaTime;
+		_deltaPos.y += SpeedY * _config.Move.y * DeltaTime;
 
 		SetPosition();
 	}
 
 	private void SetPosition()
-	{
-		if (_config != null && _config.BlockedOnScreen)
-		{
-			GameBounds.ClampsThisPosition(ref _pos);
+	{	
+		_currentPos += _dir * _deltaPos ;
+		_deltaPos.Set(0f, 0f, 0f);
 
-			_trans.position = _pos;
+		if (_config != null && _config.BlockedOnScreen)
+		{ 
+			GameBounds.ClampsThisPosition(ref _currentPos);
+			_trans.position = _currentPos;
 		}
 		else
 		{
-			if (GameBounds.IsOnDeathArea(_pos))
+			if (GameBounds.IsOnDeathArea(_currentPos))
 			{
 				if (OnOutOfBounds != null)
 					OnOutOfBounds();
 			}
 			else
-				_trans.position = _pos;
+				_trans.position = _currentPos;
 		}
 	}
 }

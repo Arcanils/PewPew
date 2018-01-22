@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using AssetsPattern;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,8 @@ public class Main : MonoBehaviour
 	public PoolManager PoolManagerInstance { get; private set; }
 	public GameplayLoop GameplayLoopInstance { get; private set; }
 	public EntityFactory EntityFactoryInstance { get; private set; }
+
+	public GameEvent OnPlayerDeath;
 
 	private LoaderLvl _loadLvl;
 
@@ -73,5 +76,20 @@ public class Main : MonoBehaviour
 	private void SpawnGame()
 	{
 		_loadLvl.CreateLvl(LvlConfigs[0]);
+	}
+
+	private void RespawnPlayer()
+	{
+		EntityFactoryInstance.GetNewEntity(LvlConfigs[0].Player, new Vector3(-6f, 0f, 0f));
+	}
+
+	private void OnDisable()
+	{
+		OnPlayerDeath.UnregisterAction(RespawnPlayer);
+	}
+
+	private void OnEnable()
+	{
+		OnPlayerDeath.RegisterAction(RespawnPlayer);
 	}
 }

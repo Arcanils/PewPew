@@ -7,4 +7,6 @@ public class MoveComponentConfig
 {
 	public Vector2 Move;
 	public bool BlockedOnScreen;
+	public Vector3 Direction;
+	
 }

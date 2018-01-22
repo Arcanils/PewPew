@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using AssetsPattern;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : BaseController
 {
 	public int IndexPlayer = -1;
+	public GameEvent GE_OnDeath;
 
 	private Vector2 vecDir;
 	private string _inputNameMoveX;
@@ -23,10 +25,17 @@ public class PlayerController : BaseController
 		vecDir.y = Input.GetAxis(_inputNameMoveY);
 		if (vecDir != Vector2.zero)
 			vecDir = vecDir.normalized * vecDir.magnitude;
-		_refPawn.Move(vecDir.x, vecDir.y, Time.fixedDeltaTime);
+		_refPawn.Move(vecDir.x, vecDir.y, DeltaTime);
 		/*
 		if (Input.GetButtonDown("SwitchAmmo"))
 			_refPawn.SwitchAmmo();
 			*/
+	}
+
+	public override void ResetAfterDisable()
+	{
+		base.ResetAfterDisable();
+		if (GE_OnDeath != null)
+			GE_OnDeath.Raise();
 	}
 }

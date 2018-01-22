@@ -17,7 +17,7 @@ public class BodyComponent : MonoBehaviour
 	public void Init(BodyComponentConfig Config)
 	{
 		_config = Config;
-		_isInvicibleByConfig = !_config.IsImmortal;
+		_isInvicibleByConfig = _config.IsImmortal;
 		CurrentHP.Value = _config.HP.Value;
 		_deadOne = false;
 	}

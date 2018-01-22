@@ -581,6 +581,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7212b86b8c1108c4ca93b9adedd0f673, type: 2}
   PrefabCam: {fileID: 114714789003499290, guid: 4f9cadd3299102745b72e98264479d3c,
     type: 2}
+  OnPlayerDeath: {fileID: 11400000, guid: 6213b0bbd6afbd245a6909219c53e3aa, type: 2}
 --- !u!4 &688198100
 Transform:
   m_ObjectHideFlags: 0

@@ -60,7 +60,6 @@ public abstract class BaseController : AbstractController
 			for (int i = _config.WatcherSets.Length - 1; i >= 0; --i)
 			{
 				_config.WatcherSets[i].Remove(this);
-				Debug.LogError(this.GetType());
 			}
 		}
 

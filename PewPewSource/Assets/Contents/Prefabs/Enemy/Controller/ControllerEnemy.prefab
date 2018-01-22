@@ -56,7 +56,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 43d37006786a06d4ba652f1f9422194e, type: 2}
   Score: {fileID: 11400000, guid: e25b83ffe3c1fca43a6f048aeaef87b8, type: 2}
   ScoreOnDeath: 100
-  VecDir: {x: 0.5, y: 0}
+  SpeedX: 2
+  SpeedY: 0
 --- !u!114 &114703553056530070
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -25,16 +25,18 @@ MonoBehaviour:
       IsImmortal: 0
       CanDamage: 0
       Damage: 0
+      DurationImmortal: 0
     MoveConfig:
       Move: {x: 10, y: 10}
       BlockedOnScreen: 1
+      Direction: {x: 0, y: 0, z: 0}
     ShootConfig:
       Ammos:
       - Bullet: {fileID: 11400000, guid: 9aaa5514ec3804043b06da88c924dd1a, type: 2}
         FireRate: 0.2
         FireStart: 1
         NElement: -1
-      AutoFire: 1
+      AutoFire: 0
   NLives:
     UseConstant: 1
     ConstantValue: 5
